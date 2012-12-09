@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html class="mcf-noframes">
+	<head>
+		  <meta http-equiv="Content-Type" content="text/html; charset=$sourceEncoding$">
+		  <title>JQuery Todo Test</title>
+		<link rel="stylesheet" href="../../target/jasmine/src/webapp/libs/base.css"/>
+		<link rel="stylesheet" href="../../target/jasmine/src/webapp/css/app.css"/>
+		  
+		  $cssDependencies$		
+		  $javascriptDependencies$		  
+		  $sources$
+
+	</head>
+	<body class="mcf-page mcf-page-index mcf-segment-1 mcf-lean-backward">
+		<script type="text/javascript">
+		if(window.location.href.indexOf("ManualSpecRunner.html") !== -1) {
+		  document.body.appendChild(document.createTextNode("Warning: opening this HTML file directly from the file system is deprecated. You should instead try running `mvn jasmine:bdd` from the command line, and then visit `http://localhost:8234` in your browser. "))
+		}
+
+		var executeJasmineSpecs = function(){
+				window.reporter = new jasmine.$reporter$(); 
+				jasmine.getEnv().addReporter(reporter);
+		  		jasmine.getEnv().execute();		
+		};
+
+		//if (document.location.protocol !== "http:") {
+			if (window.addEventListener) {
+				addEventListener('DOMContentLoaded', executeJasmineSpecs, false);
+			} else {
+				attachEvent('onload', executeJasmineSpecs);
+			}
+		//}
+
+		</script>	
+	<section id="todoapp">
+		<header id="header">
+			<h1>todos</h1>
+			<input id="new-todo" placeholder="What needs to be done?" autofocus>
+		</header>
+		<section id="main">
+			<input id="toggle-all" type="checkbox">
+			<label for="toggle-all">Mark all as complete</label>
+			<ul id="todo-list"></ul>
+		</section>
+		<footer id="footer">
+			<span id="todo-count"><strong>0</strong> item left</span>
+			<button id="clear-completed">Clear completed</button>
+		</footer>
+	</section>
+	<footer id="info">
+		<p>Double-click to edit a todo</p>
+		<p>Created by <a href="http://github.com/sindresorhus">Sindre Sorhus</a></p>
+		<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+	</footer>
+	<script id="todo-template" type="text/x-handlebars-template">
+	{{#this}}
+	<li {{#if completed}}class="completed"{{/if}} data-id="{{id}}">
+		<div class="view">
+		    <input class="toggle" type="checkbox" {{#if completed}}checked{{/if}}>
+			<label>{{title}}</label>
+			<button class="destroy"></button>
+		</div>
+		<input class="edit" value="{{title}}">
+	</li>
+	{{/this}}
+	</script>
+	<script id="footer-template" type="text/x-handlebars-template">
+	<span id="todo-count"><strong>{{activeTodoCount}}</strong> {{activeTodoWord}} left</span>
+	{{#if completedTodos}}<button id="clear-completed">Clear completed ({{completedTodos}})</button>{{/if}}
+	</script>
+	</body>
+</html>

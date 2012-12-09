@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.bootcamp.jasmine</groupId>
+	<artifactId>jquery_todo_maven</artifactId>
+	<version>0.1-SNAPSHOT</version>
+
+	<packaging>war</packaging>
+	<name>Jasmine Bootcamp</name>
+	<url>http://www.capgemini.com</url>
+
+	<properties>
+		<jasmine.phase>test</jasmine.phase>
+		<timestamp>${maven.build.timestamp}</timestamp>
+	</properties>	
+
+	<build>
+		<plugins>
+			<!-- Javascript testing -->
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>1.1.0</version>
+				<executions>
+					<execution>
+						<phase>test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<preloadSources>
+						<source>src/main/webapp/libs/base.js</source>
+						<source>src/main/webapp/libs/jquery.min.js</source>
+						<source>src/main/webapp/libs/handlebars.min.js</source>
+						<source>src/main/webapp/js/app.js</source>
+					</preloadSources>
+					<sourceExcludes>
+						<exclude>**/**/**/*.js</exclude>
+						<exclude>**/*.js</exclude>
+					</sourceExcludes>					
+					<jsSrcDir>src/main</jsSrcDir>
+					<jsTestSrcDir>src/test</jsTestSrcDir>
+					<haltOnFailure>true</haltOnFailure>
+					<customRunnerTemplate>src/test/resources/SpecRunner.htmltemplate</customRunnerTemplate>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.github.timurstrekalov</groupId>
+				<artifactId>saga-maven-plugin</artifactId>
+				<version>1.2.5</version>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>coverage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<baseDir>${basedir}/target/jasmine</baseDir>
+					<includes>
+						SpecRunner.html
+					</includes>
+					<outputStrategy>
+						BOTH
+					</outputStrategy>
+					<includeInlineScripts>
+						true
+					</includeInlineScripts>
+					<outputDir>${basedir}/target/coverage</outputDir>
+					<outputInstrumentedFiles>
+						${basedir}/target/coverage/instrumented
+					</outputInstrumentedFiles>
+					<noInstrumentPatterns>
+						<pattern>.+test.+</pattern>
+						<pattern>.+target.+</pattern>
+						<pattern>.+libs.+</pattern>
+						<pattern>.+SpecRunner.+</pattern>
+					</noInstrumentPatterns>
+				</configuration>
+			</plugin>			
+			
+		</plugins>
+	</build>
+
+</project>
