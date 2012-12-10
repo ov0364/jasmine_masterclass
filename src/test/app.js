@@ -1,5 +1,7 @@
-describe("Masterclass Test", function(){
-	it("should not fail", function(){
-		expect("jasmine").not.toEqual('jasminex');
+define(function () {
+	describe("Masterclass Test", function () {
+		it("should not fail", function () {
+			expect("jasmine").not.toEqual('jasminex');
+		});
 	});
 });
